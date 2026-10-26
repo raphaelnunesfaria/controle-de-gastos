@@ -219,10 +219,15 @@ function verSaldo() {
         }
     }
 }
-// TODO: esvaziar os campos do formulario e deixar os selects no valor inicial
-// tambem chamar limparErros()
+
 function limparFormulario() {
-    // TODO
+    document.getElementById("campoDescricao").value = "";
+    document.getElementById("campoValor").value = "";
+    document.getElementById("campoData").value = "";
+    document.getElementById("campoCategoria").value = "";
+
+    document.getElementById("campoTipo").value = "receita";
+    document.getElementById("campoNatureza").value = "fixa";
 }
 
 
