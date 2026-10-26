@@ -1,0 +1,397 @@
+/* ============================================================
+   Controle de Gastos - estilo minimalista
+
+   Classes uteis para o JavaScript:
+   .escondido           esconde qualquer elemento (adicionar/remover)
+   .valor-receita       cor do valor de receita
+   .valor-despesa       cor do valor de despesa
+   .saldo-positivo      cor do saldo positivo
+   .saldo-negativo      cor do saldo negativo
+   .etiqueta            selo pequeno (usar junto com uma das duas abaixo)
+   .etiqueta-fixa       selo da natureza "fixa"
+   .etiqueta-variavel   selo da natureza "variavel"
+   .acoes               celula dos botoes da linha
+   .botao-editar        botao de editar dentro da tabela
+   .botao-remover       botao de remover dentro da tabela
+   .linha-em-edicao     destaca a linha que esta sendo editada
+   .painel-edicao       destaca o formulario no modo edicao
+   .campo-invalido      borda vermelha no campo com erro
+   .feedback-sucesso    aviso verde  (usar junto com .feedback)
+   .feedback-erro       aviso vermelho
+   .feedback-aviso      aviso amarelo
+   ============================================================ */
+
+:root {
+    --fundo: #f6f6f4;
+    --superficie: #ffffff;
+    --texto: #1f2328;
+    --texto-suave: #6b7280;
+    --borda: #e3e3df;
+    --destaque: #2f5d50;
+    --receita: #1f7a4d;
+    --despesa: #b3382c;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+}
+
+.pagina {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 16px 64px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+h2 {
+    margin: 0 0 16px;
+    font-size: 1.05rem;
+}
+
+/* ---------- cabecalho ---------- */
+
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.botoes-arquivo {
+    display: flex;
+    gap: 8px;
+}
+
+/* ---------- resumo ---------- */
+
+.resumo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.cartao {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    background: var(--superficie);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+}
+
+.cartao-titulo {
+    font-size: 0.78rem;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.cartao strong {
+    margin-top: 4px;
+    font-size: 1.35rem;
+}
+
+.saldo-positivo {
+    color: var(--receita);
+}
+
+.saldo-negativo {
+    color: var(--despesa);
+}
+
+/* ---------- aviso (feedback) ---------- */
+
+.feedback {
+    margin: 0 0 24px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    border: 1px solid;
+    border-radius: 6px;
+}
+
+.feedback-sucesso {
+    color: #1b5e3a;
+    background: #e8f3ec;
+    border-color: #bfdccb;
+}
+
+.feedback-erro {
+    color: #8f2c22;
+    background: #fbecea;
+    border-color: #f0c5c0;
+}
+
+.feedback-aviso {
+    color: #7a5a12;
+    background: #fbf4e3;
+    border-color: #ecd9a4;
+}
+
+/* ---------- paineis ---------- */
+
+.painel {
+    padding: 20px;
+    margin-bottom: 24px;
+    background: var(--superficie);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+}
+
+/* formulario no modo edicao */
+.painel-edicao {
+    border-color: var(--destaque);
+    box-shadow: 0 0 0 1px var(--destaque);
+}
+
+.painel-edicao h2 {
+    color: var(--destaque);
+}
+
+/* ---------- formulario ---------- */
+
+.formulario {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.campo-largo {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-size: 0.85rem;
+    color: var(--texto-suave);
+}
+
+input,
+select {
+    font: inherit;
+    padding: 8px 10px;
+    background: #fff;
+    color: var(--texto);
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid var(--destaque);
+    outline-offset: 1px;
+}
+
+/* campo com erro de validacao */
+.campo-invalido {
+    border-color: var(--despesa);
+}
+
+.erro-campo {
+    font-size: 0.8rem;
+    color: var(--despesa);
+}
+
+.linha-botoes {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 8px;
+}
+
+/* ---------- botoes ---------- */
+
+.botao {
+    display: inline-block;
+    padding: 8px 14px;
+    font: inherit;
+    font-size: 0.9rem;
+    color: #fff;
+    background: var(--destaque);
+    border: 1px solid var(--destaque);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.botao:hover {
+    opacity: 0.9;
+}
+
+.botao-secundario {
+    color: var(--texto);
+    background: transparent;
+    border-color: var(--borda);
+}
+
+.botao-secundario:hover {
+    background: var(--fundo);
+    opacity: 1;
+}
+
+.botao-pequeno {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+}
+
+/* ---------- filtros ---------- */
+
+.barra-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.campo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.campo-filtro select,
+.campo-filtro input {
+    height: 34px;
+    padding: 6px 8px;
+    font-size: 0.9rem;
+}
+
+.texto-contagem {
+    margin: 0 0 8px;
+    font-size: 0.85rem;
+    color: var(--texto-suave);
+}
+
+/* ---------- tabela ---------- */
+
+.tabela-rolagem {
+    overflow-x: auto;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.tabela th {
+    padding: 8px;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--borda);
+}
+
+.tabela td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.linha-em-edicao td {
+    background: #f1f6f4;
+}
+
+.valor-receita {
+    color: var(--receita);
+    font-weight: 600;
+}
+
+.valor-despesa {
+    color: var(--despesa);
+    font-weight: 600;
+}
+
+/* selos de natureza (fixa / variavel) */
+.etiqueta {
+    display: inline-block;
+    padding: 1px 8px;
+    font-size: 0.75rem;
+    border: 1px solid var(--borda);
+    border-radius: 999px;
+}
+
+.etiqueta-fixa {
+    color: var(--destaque);
+    background: #eef3f1;
+    border-color: #cfe0da;
+}
+
+.etiqueta-variavel {
+    color: #8a5a12;
+    background: #faf3e6;
+    border-color: #ecdcb8;
+}
+
+.acoes {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.botao-editar,
+.botao-remover {
+    padding: 4px 6px;
+    font: inherit;
+    font-size: 0.82rem;
+    color: var(--texto-suave);
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.botao-editar:hover {
+    color: var(--destaque);
+}
+
+.botao-remover:hover {
+    color: var(--despesa);
+}
+
+.mensagem-vazia {
+    margin: 0;
+    padding: 24px 0 8px;
+    text-align: center;
+    color: var(--texto-suave);
+}
+
+/* ---------- celular ---------- */
+
+@media (max-width: 640px) {
+    .resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-filtro {
+        flex: 1 1 140px;
+    }
+}
+
+/* sempre por ultimo, para vencer as outras regras */
+.escondido {
+    display: none !important;
+}
