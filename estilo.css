@@ -560,3 +560,19 @@ select:focus {
 .escondido {
     display: none !important;
 }
+
+.rodape-lista {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.botao-perigo:hover {
+    color: var(--despesa);
+    border-color: var(--despesa);
+    background: rgba(179, 56, 44, 0.1);
+}
+
+.campo-busca {
+    flex: 1 1 200px;
+}

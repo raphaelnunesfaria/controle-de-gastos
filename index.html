@@ -99,6 +99,10 @@
         <h2>Lançamentos</h2>
 
         <div class="barra-filtros">
+            <div class="campo-filtro campo-busca">
+                <label for="campoFiltroBusca">Buscar na descrição</label>
+                <input type="search" id="campoFiltroBusca" placeholder="ex: mercado">
+            </div>
             <div class="campo-filtro">
                 <label for="campoFiltroCategoria">Categoria</label>
                 <select id="campoFiltroCategoria">
@@ -152,6 +156,9 @@
         </div>
 
         <p id="mensagemVazia" class="mensagem-vazia">Nenhum lançamento cadastrado.</p>
+        <div class="rodape-lista">
+            <button type="button" id="botaoApagarTudo" class="botao botao-secundario botao-pequeno botao-perigo">Apagar tudo</button>
+        </div>
     </section>
 
 </main>

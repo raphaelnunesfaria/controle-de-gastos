@@ -201,6 +201,7 @@ function verSaldo() {
         } else {
             totalDespesas += item.valor;
         }
+    } 
 
         let saldo = totalReceitas - totalDespesas;
         let textoReceitas = document.getElementById("textoReceitas");
@@ -217,7 +218,7 @@ function verSaldo() {
             textoSaldo.classList.remove("saldo-negativo");
             textoSaldo.classList.add("saldo-positivo");
         }
-    }
+
 }
 
 function limparFormulario() {
@@ -230,6 +231,24 @@ function limparFormulario() {
     document.getElementById("campoNatureza").value = "fixa";
 }
 
+function apagarTudo(){
+    if (lancamentos.length === 0){
+        alert ("Não há nada para ser apagado");
+        return
+    }
+
+    let confirmou = confirm("Apagar todos os lançamentos? Isso não pode ser desfeito.");
+
+    if (confirmou === false) {
+        return;
+    }
+
+    lancamentos = [];
+    salvar();
+    preencherFiltroCategorias();
+    listar();
+    verSaldo();
+}
 
 // ============================================================
 // VERSAO FINAL (ate 10/11) - FUNCOES PARA IMPLEMENTAR
@@ -334,6 +353,7 @@ document.getElementById("formularioLancamento").addEventListener("submit", cadas
 document.getElementById("botaoCancelarEdicao").addEventListener("click", cancelarEdicao);
 document.getElementById("botaoExportar").addEventListener("click", exportar);
 document.getElementById("campoImportar").addEventListener("change", importar);
+document.getElementById("botaoApagarTudo").addEventListener("click", apagarTudo); 
 
 // os 4 filtros chamam a mesma funcao
 document.getElementById("campoFiltroCategoria").addEventListener("change", aplicarFiltros);
@@ -341,3 +361,4 @@ document.getElementById("campoFiltroTipo").addEventListener("change", aplicarFil
 document.getElementById("campoFiltroNatureza").addEventListener("change", aplicarFiltros);
 document.getElementById("campoFiltroMes").addEventListener("change", aplicarFiltros);
 document.getElementById("botaoLimparFiltros").addEventListener("click", limparFiltros);
+document.getElementById("campoFiltroBusca").addEventListener("input", aplicarFiltros);
