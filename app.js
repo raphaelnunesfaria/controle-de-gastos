@@ -139,6 +139,7 @@ function cadastrar(evento) {
     salvar();
     listar();
     verSaldo();
+    preencherFiltroCategorias();
     limparFormulario();
     mostrarFeedback("Lançamento cadastrado!", "sucesso");
 }
