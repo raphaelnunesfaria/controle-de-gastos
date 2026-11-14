@@ -252,10 +252,6 @@ function apagarTudo(){
 
 // ---------- filtros ----------
 
-// TODO: preencher o select campoFiltroCategoria com as categorias que existem nos lancamentos
-// passos: guardar a opcao "Todas" (value "") -> percorrer os lancamentos -> adicionar cada
-//         categoria so uma vez (sem repetir) -> manter selecionada a escolha atual, se ainda existir
-// chamar depois de cadastrar, editar, remover e importar
 function preencherFiltroCategorias() {
     let select = document.getElementById("campoFiltroCategoria");
     let categoriaAtual = select.value;
@@ -290,7 +286,37 @@ function preencherFiltroCategorias() {
 // dica: a data esta no formato "2026-10-21", entao o mes sao os 7 primeiros caracteres
 //       (data.substring(0, 7) bate com o valor do campoFiltroMes, "2026-10")
 function aplicarFiltros() {
-    // TODO
+    let categoria = document.getElementById("campoFiltroCategoria").value;
+    let tipo = document.getElementById("campoFiltroTipo").value;
+    let natureza = document.getElementById("campoFiltroNatureza").value;
+    let mes = document.getElementById("campoFiltroMes").value;
+    let busca = document.getElementById("campoFiltroBusca").value.trim().toLowerCase();
+    let filtrados = [];
+
+    for (let item of lancamentos){
+        let passou = true;
+
+        if (categoria !== "" && item.categoria !== categoria){
+            passou = false;
+        }
+        if (tipo !== "" && item.tipo !== tipo){
+            passou = false;
+        }
+        if (natureza !== "" && item.natureza !== natureza){
+            passou = false;
+        }
+        if (mes !== "" && item.data.substring(0, 7) !== mes){
+            passou = false;
+        }
+        if (busca !== "" && item.descricao.toLowerCase().includes(busca) === false) {
+            passou = false;
+        }
+        if (passou === true) {
+            filtrados.push(item);
+        }
+    }
+
+    listar(filtrados);
 }
 
 // TODO: voltar os 4 filtros para o valor inicial e mostrar a lista completa
