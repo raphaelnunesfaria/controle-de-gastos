@@ -1,0 +1,210 @@
+[
+    {
+        "descricao": "Salário - Pai",
+        "valor": 4000,
+        "data": "2026-11-13",
+        "tipo": "receita",
+        "natureza": "fixa",
+        "categoria": "Trabalho"
+    },
+    {
+        "descricao": "Salário - Mãe",
+        "valor": 4000,
+        "data": "2026-11-13",
+        "tipo": "receita",
+        "natureza": "fixa",
+        "categoria": "Trabalho"
+    },
+    {
+        "descricao": "Salário - filho1",
+        "valor": 800,
+        "data": "2026-11-13",
+        "tipo": "receita",
+        "natureza": "fixa",
+        "categoria": "Trabalho"
+    },
+    {
+        "descricao": "Salário - filho2",
+        "valor": 800,
+        "data": "2026-11-13",
+        "tipo": "receita",
+        "natureza": "fixa",
+        "categoria": "Trabalho"
+    },
+    {
+        "descricao": "Freelance - pai",
+        "valor": 1000,
+        "data": "2026-11-13",
+        "tipo": "receita",
+        "natureza": "variável",
+        "categoria": "Trabalho"
+    },
+    {
+        "descricao": "Freelance - mãe",
+        "valor": 1100,
+        "data": "2026-11-13",
+        "tipo": "receita",
+        "natureza": "variável",
+        "categoria": "Trabalho"
+    },
+    {
+        "descricao": "Freelance - filho1",
+        "valor": 400,
+        "data": "2026-11-13",
+        "tipo": "receita",
+        "natureza": "variável",
+        "categoria": "Trabalho"
+    },
+    {
+        "descricao": "Prestação da casa",
+        "valor": 2100,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "fixa",
+        "categoria": "Moradia"
+    },
+    {
+        "descricao": "Prestação do carro do pai",
+        "valor": 900,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "fixa",
+        "categoria": "Transporte"
+    },
+    {
+        "descricao": "Prestação do carro da mãe",
+        "valor": 1000,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "fixa",
+        "categoria": "Transporte"
+    },
+    {
+        "descricao": "Água",
+        "valor": 150,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "fixa",
+        "categoria": "Contas"
+    },
+    {
+        "descricao": "Luz",
+        "valor": 300,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "fixa",
+        "categoria": "Contas"
+    },
+    {
+        "descricao": "Internet",
+        "valor": 180,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "fixa",
+        "categoria": "Contas"
+    },
+    {
+        "descricao": "Streaming",
+        "valor": 150,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "fixa",
+        "categoria": "Assinaturas"
+    },
+    {
+        "descricao": "Ração de cachorro",
+        "valor": 120,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "fixa",
+        "categoria": "Pets"
+    },
+    {
+        "descricao": "Compra mensal do supermercado",
+        "valor": 1200,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "fixa",
+        "categoria": "Alimentação"
+    },
+    {
+        "descricao": "Compras variáveis no mercado",
+        "valor": 300,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "variável",
+        "categoria": "Alimentação"
+    },
+    {
+        "descricao": "Lazer",
+        "valor": 300,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "variável",
+        "categoria": "Lazer"
+    },
+    {
+        "descricao": "Gasolina do carro do pai",
+        "valor": 450,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "variável",
+        "categoria": "Transporte"
+    },
+    {
+        "descricao": "Gasolina do carro da mãe",
+        "valor": 500,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "variável",
+        "categoria": "Transporte"
+    },
+    {
+        "descricao": "Roupas mãe",
+        "valor": 300,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "variável",
+        "categoria": "Vestuário"
+    },
+    {
+        "descricao": "Roupas pai",
+        "valor": 200,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "variável",
+        "categoria": "Vestuário"
+    },
+    {
+        "descricao": "Roupas filhos",
+        "valor": 750,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "variável",
+        "categoria": "Vestuário"
+    },
+    {
+        "descricao": "Mecânico",
+        "valor": 150,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "variável",
+        "categoria": "Transporte"
+    },
+    {
+        "descricao": "Veterinário",
+        "valor": 280,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "variável",
+        "categoria": "Pets"
+    },
+    {
+        "descricao": "Cartão de crédito",
+        "valor": 2000,
+        "data": "2026-11-13",
+        "tipo": "despesa",
+        "natureza": "variável",
+        "categoria": "Financeiro"
+    }
+]
