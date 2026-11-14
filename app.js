@@ -240,9 +240,10 @@ function apagarTudo(){
         return;
     }
     lancamentos = [];
+
     salvar();
     preencherFiltroCategorias();
-    listar();
+    aplicarFiltros();
     verSaldo();
 }
 
@@ -279,12 +280,7 @@ function preencherFiltroCategorias() {
     }
 }
 
-// TODO: aplicar TODOS os filtros ao mesmo tempo e mostrar o resultado
-// ids usados: campoFiltroCategoria, campoFiltroTipo, campoFiltroNatureza, campoFiltroMes
-// passos: ler os 4 valores -> for percorrendo lancamentos -> guardar em um novo array
-//         so os itens que passam em cada filtro ("" = nao filtrar) -> listar(novoArray)
-// dica: a data esta no formato "2026-10-21", entao o mes sao os 7 primeiros caracteres
-//       (data.substring(0, 7) bate com o valor do campoFiltroMes, "2026-10")
+
 function aplicarFiltros() {
     let categoria = document.getElementById("campoFiltroCategoria").value;
     let tipo = document.getElementById("campoFiltroTipo").value;
@@ -321,8 +317,15 @@ function aplicarFiltros() {
 
 // TODO: voltar os 4 filtros para o valor inicial e mostrar a lista completa
 function limparFiltros() {
-    // TODO
+    document.getElementById("campoFiltroCategoria").value = "";
+    document.getElementById("campoFiltroTipo").value = "";
+    document.getElementById("campoFiltroNatureza").value = "";
+    document.getElementById("campoFiltroMes").value = "";
+    document.getElementById("campoFiltroBusca").value = "";
+
+    aplicarFiltros();
 }
+
 
 // ---------- editar e remover ----------
 
