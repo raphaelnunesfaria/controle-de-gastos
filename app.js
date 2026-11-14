@@ -110,7 +110,6 @@ function formatarData (data){
     const ano = datas[0];
     const mes = datas[1];
     const dia = datas[2];
-
     return `${dia}/${mes}/${ano}`;
 }
 
@@ -126,6 +125,7 @@ function cadastrar(evento) {
         mostrarFeedback("Preencha todos os campos corretamente.", "erro");
         return
     }
+
     const cadastroNovo = {
         descricao: descricao,
         valor: valor,
@@ -141,7 +141,6 @@ function cadastrar(evento) {
     verSaldo();
     limparFormulario();
     mostrarFeedback("Lançamento cadastrado!", "sucesso");
-    mostrarErro("", "Erro!")
 }
 
 function listar(listaParaMostrar) {
@@ -153,10 +152,8 @@ function listar(listaParaMostrar) {
     let mensagemVazia = document.getElementById("mensagemVazia");
     tabela.innerHTML = "";
     
-
     if (listaParaMostrar.length === 0){
         mensagemVazia.classList.remove("escondido");  
-        
     } else {
         mensagemVazia.classList.add("escondido");
     }
@@ -198,7 +195,6 @@ function verSaldo() {
     let totalReceitas = 0;
     let totalDespesas = 0;
     for (let item of lancamentos){
-
         if (item.tipo == "receita") {
             totalReceitas += item.valor;
         } else {
@@ -229,7 +225,6 @@ function limparFormulario() {
     document.getElementById("campoValor").value = "";
     document.getElementById("campoData").value = "";
     document.getElementById("campoCategoria").value = "";
-
     document.getElementById("campoTipo").value = "receita";
     document.getElementById("campoNatureza").value = "fixa";
 }
@@ -239,13 +234,10 @@ function apagarTudo(){
         alert ("Não há nada para ser apagado");
         return
     }
-
     let confirmou = confirm("Apagar todos os lançamentos? Isso não pode ser desfeito.");
-
     if (confirmou === false) {
         return;
     }
-
     lancamentos = [];
     salvar();
     preencherFiltroCategorias();
@@ -264,7 +256,30 @@ function apagarTudo(){
 //         categoria so uma vez (sem repetir) -> manter selecionada a escolha atual, se ainda existir
 // chamar depois de cadastrar, editar, remover e importar
 function preencherFiltroCategorias() {
-    // TODO
+    let select = document.getElementById("campoFiltroCategoria");
+    let categoriaAtual = select.value;
+    select.innerHTML = "";
+
+    let opcaoTodas = document.createElement("option");
+    opcaoTodas.value = "";
+    opcaoTodas.textContent = "Todas";
+    select.appendChild(opcaoTodas);
+
+    let categoriasVistas = [];
+
+    for (let item of lancamentos) {
+        if (categoriasVistas.includes(item.categoria) === false) {
+            categoriasVistas.push(item.categoria);
+            let opcao = document.createElement("option");
+            opcao.value = item.categoria;
+            opcao.textContent = item.categoria;
+            select.appendChild(opcao);
+        }
+    }
+
+    if (categoriasVistas.includes(categoriaAtual)) {
+        select.value = categoriaAtual;
+    }
 }
 
 // TODO: aplicar TODOS os filtros ao mesmo tempo e mostrar o resultado
@@ -304,24 +319,6 @@ function cancelarEdicao() {
 // dica: pedir confirmacao com confirm(); depois lancamentos.splice(indice, 1)
 //       e chamar salvar(), preencherFiltroCategorias(), aplicarFiltros() e verSaldo()
 function remover(indice) {
-    // TODO
-}
-
-// ---------- validacoes e avisos ----------
-
-// TODO: conferir os campos do formulario; devolver true (tudo certo) ou false (tem erro)
-// regras sugeridas: descricao nao vazia | valor numerico maior que zero
-//                   data preenchida | categoria nao vazia
-// para cada erro, chamar mostrarErro("Descricao", "texto do erro")
-// dica: trim() tira os espacos do comeco e do fim do texto
-function validarFormulario() {
-    // TODO
-}
-
-
-
-// TODO: esconder todas as mensagens de erro e tirar a classe campo-invalido dos campos
-function limparErros() {
     // TODO
 }
 
