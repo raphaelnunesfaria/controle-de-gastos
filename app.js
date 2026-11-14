@@ -123,6 +123,7 @@ function cadastrar(evento) {
     let natureza = document.getElementById("campoNatureza").value;
     let categoria = document.getElementById("campoCategoria").value;
     if (descricao.trim() == "" || categoria.trim() == "" || data == "" || isNaN(valor) || valor <= 0){
+        mostrarFeedback("Preencha todos os campos corretamente.", "erro");
         return
     }
     const cadastroNovo = {
@@ -139,6 +140,8 @@ function cadastrar(evento) {
     listar();
     verSaldo();
     limparFormulario();
+    mostrarFeedback("Lançamento cadastrado!", "sucesso");
+    mostrarErro("", "Erro!")
 }
 
 function listar(listaParaMostrar) {
@@ -315,27 +318,21 @@ function validarFormulario() {
     // TODO
 }
 
-// TODO: mostrar a mensagem de erro de um campo
-// "nomeCampo" e o nome sem o prefixo: "Descricao", "Valor", "Data" ou "Categoria"
-//   -> o input e "campo" + nomeCampo   (ex: campoValor)
-//   -> o texto do erro vai em "erro" + nomeCampo   (ex: erroValor)
-// passos: escrever o texto no erro e tirar a classe escondido
-//         -> adicionar a classe campo-invalido no input
-function mostrarErro(nomeCampo, texto) {
-    // TODO
-}
+
 
 // TODO: esconder todas as mensagens de erro e tirar a classe campo-invalido dos campos
 function limparErros() {
     // TODO
 }
 
-// TODO: mostrar um aviso no mensagemFeedback (ex: "Lancamento cadastrado!")
-// parametro "tipo": "sucesso", "erro" ou "aviso" -> classe feedback-sucesso, feedback-erro ou feedback-aviso
-// passos: escrever o texto -> trocar a classe do tipo -> tirar a classe escondido
-// opcional: setTimeout(function () { ... }, 3000) para esconder depois de 3 segundos
+
 function mostrarFeedback(texto, tipo) {
-    // TODO
+    let caixa = document.getElementById("mensagemFeedback");
+    caixa.textContent = texto;
+    caixa.className = "feedback feedback-" + tipo;
+    setTimeout(function () {
+       caixa.classList.add("escondido");
+   }, 3000);
 }
 
 
