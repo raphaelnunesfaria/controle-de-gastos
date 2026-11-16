@@ -135,13 +135,23 @@ function cadastrar(evento) {
         categoria: categoria
     }
 
-    lancamentos.push(cadastroNovo);
+    let mensagem = "";
+
+    if (indiceEdicao === -1) {
+        lancamentos.push(cadastroNovo);
+        mensagem = "Lançamento cadastrado!";
+    } else {
+        lancamentos[indiceEdicao] = cadastroNovo;
+        mensagem = "Lançamento atualizado!";
+        cancelarEdicao();
+    }
+
     salvar();
-    listar();
-    verSaldo();
     preencherFiltroCategorias();
+    aplicarFiltros();
+    verSaldo();
     limparFormulario();
-    mostrarFeedback("Lançamento cadastrado!", "sucesso");
+    mostrarFeedback(mensagem, "sucesso");
 }
 
 function listar(listaParaMostrar) {
@@ -167,11 +177,13 @@ function listar(listaParaMostrar) {
         let celulaTipo = document.createElement("td"); 
         let celulaNatureza = document.createElement("td"); 
         let celulaValor = document.createElement("td"); 
+
         celulaData.textContent = formatarData(item.data);
         celulaDescricao.textContent = item.descricao;
         celulaCategoria.textContent = item.categoria;
         celulaTipo.textContent = item.tipo;
         celulaNatureza.textContent = item.natureza;
+
         if (item.tipo === "receita") {
             celulaValor.textContent = "+ " + formatarMoeda(item.valor);
             celulaValor.classList.add("valor-receita");
@@ -179,12 +191,38 @@ function listar(listaParaMostrar) {
             celulaValor.textContent = "- " + formatarMoeda(item.valor);
             celulaValor.classList.add("valor-despesa");
         }
+
+        let indiceReal = lancamentos.indexOf(item);
+        let celulaAcoes = document.createElement("td");
+        celulaAcoes.classList.add("acoes");
+
+        let botaoEditar = document.createElement("button");
+        botaoEditar.textContent = "Editar";
+        botaoEditar.classList.add("botao-editar");
+        botaoEditar.addEventListener("click", function () {
+            editar(indiceReal);
+        });
+
+        let botaoRemover = document.createElement("button");
+        botaoRemover.textContent = "Remover";
+        botaoRemover.classList.add("botao-remover");
+        botaoRemover.addEventListener("click", function () {
+            remover(indiceReal);
+        });
+
+        celulaAcoes.appendChild(botaoEditar);
+        celulaAcoes.appendChild(botaoRemover);
+
+        if (indiceReal === indiceEdicao) {
+            linha.classList.add("linha-em-edicao");
+        }
         linha.appendChild(celulaData);
         linha.appendChild(celulaDescricao);
         linha.appendChild(celulaCategoria);
         linha.appendChild(celulaTipo);
         linha.appendChild(celulaNatureza);
         linha.appendChild(celulaValor);
+        linha.appendChild(celulaAcoes);
         tabela.appendChild(linha);   
     }
 
@@ -315,7 +353,6 @@ function aplicarFiltros() {
     listar(filtrados);
 }
 
-// TODO: voltar os 4 filtros para o valor inicial e mostrar a lista completa
 function limparFiltros() {
     document.getElementById("campoFiltroCategoria").value = "";
     document.getElementById("campoFiltroTipo").value = "";
@@ -329,27 +366,55 @@ function limparFiltros() {
 
 // ---------- editar e remover ----------
 
-// TODO: levar os dados do lancamento da posicao "indice" (do array lancamentos) para o formulario
-// passos: guardar o indice em indiceEdicao -> preencher os campos
-//         -> trocar o texto do tituloFormulario e do botaoSalvarLancamento
-//         -> adicionar a classe painel-edicao no painelFormulario
-//         -> mostrar o botaoCancelarEdicao (tirar a classe escondido)
 function editar(indice) {
-    // TODO
+    indiceEdicao = indice;
+    item = lancamentos[indice];
+
+    document.getElementById("campoDescricao").value = item.descricao;
+    document.getElementById("campoValor").value = item.valor;
+    document.getElementById("campoData").value = item.data;
+    document.getElementById("campoTipo").value = item.tipo;
+    document.getElementById("campoNatureza").value = item.natureza;
+    document.getElementById("campoCategoria").value = item.categoria;
+    document.getElementById("tituloFormulario").textContent = "Editando lançamento";
+    document.getElementById("botaoSalvarLancamento").textContent = "Salvar alterações";
+    document.getElementById("painelFormulario").classList.add("painel-edicao");
+    document.getElementById("botaoCancelarEdicao").classList.remove("escondido");
+
+    aplicarFiltros();
 }
 
-// TODO: sair do modo de edicao
-// passos: indiceEdicao volta para -1 -> limparFormulario() -> restaurar os textos
-//         -> tirar a classe painel-edicao -> esconder o botaoCancelarEdicao
-function cancelarEdicao() {
-    // TODO
+function cancelarEdicao(){
+    indiceEdicao = -1;
+    limparFormulario(); 
+    document.getElementById("tituloFormulario").textContent = "Novo lançamento";
+    document.getAnimations("botaoSalvarLancamento").textContent = "Cadastrar";
+    document.getElementById("painelFormulario").classList.remove("painel-edicao");
+    document.getElementById("botaoCancelarEdicao").classList.add("escondido");
+
+    aplicarFiltros()
+
 }
 
-// TODO: remover o lancamento da posicao "indice" (do array lancamentos)
-// dica: pedir confirmacao com confirm(); depois lancamentos.splice(indice, 1)
-//       e chamar salvar(), preencherFiltroCategorias(), aplicarFiltros() e verSaldo()
+
 function remover(indice) {
-    // TODO
+    let confirmar = confirm("Remover este lançamento? ");
+
+    if (confirmar === false){
+        return;
+    }
+
+    lancamentos.splice(indice, 1);
+
+    if (indiceEdicao !== -1){
+        cancelarEdicao();
+    }
+
+    salvar();
+    preencherFiltroCategorias();
+    aplicarFiltros();
+    verSaldo();
+    mostrarFeedback("Lançamento removido.", "sucesso");
 }
 
 
